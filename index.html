@@ -1,14 +1,12 @@
 <!doctype html>
-<title>Google spreadsheet to HT-table</title>
+<title>Google spreadsheet to HT-table 2</title>
 
 <script type="text/javascript">
 
 	function loadData() {
 		document.getElementById("info").innerHTML = "Loading...";
-
-		// var url="https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/edit?usp=sharing";
-		// var url="https://docs.google.com/spreadsheet/pub?key=p_aHW5nOrj0VO2ZHTRRtqTQ&single=true&gid=0&range=A1&output=csv";
-		var url="https://docs.google.com/spreadsheet/pub?key=1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI&output=csv";
+		// /d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI
+		var url="https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/gviz/tq?tqx=out:csv&sheet=Sheet1";
 		xmlhttp=new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
