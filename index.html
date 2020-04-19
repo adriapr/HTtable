@@ -4,8 +4,6 @@
 <script type="text/javascript">
 
 	function loadData() {
-
-
 		document.getElementById("info").innerHTML = "Loading...";
 
 		// var url="https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/edit?usp=sharing";
@@ -21,19 +19,14 @@
 		document.getElementById("info").innerHTML = "Meh";
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
-
-
 	}
 
 </script>
 
-<!-- <script src=http://dystroy.org/JSON.prune/JSON.prune.js></script>
- -->
-
 <html>
   <body>
-    <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
+    <button type="button" onclick="loadData()">Test</button>
     <div id="display"></div>
-    <div id="info"></div>
+    <div id="info">Info</div>
   </body>
 </html>
