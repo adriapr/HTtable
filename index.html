@@ -3,6 +3,29 @@
 
 <script type="text/javascript">
 
+	function arrayToHTtable(table) {
+		var str_output = "[table]<br>";
+
+		for (row of table) {
+			str_output += "[tr]";
+			for (col of row) {
+				str_output += "[td]" + col + "[/td]";
+			}
+			str_output += "[/tr]<br>";
+		}
+
+		str_output += "[/table]";
+
+		return str_output;
+
+		// [table]
+		// [tr][td]UE Països Catalans[/td][td]Maurya Pal i Gol[/td][td]0-7[/td][/tr]
+		// [tr][td]Palomera Blanes[/td][td]C.F. Hippycat[/td][td]2-0[/td][/tr]
+		// [tr][td]Birrero Sabadell[/td][td]Angelets de la Terra[/td][td]0-6[/td][/tr]
+		// [/table]
+
+	}
+
 	function csvToArray(text) {
 		let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
 		for (l of text) {
@@ -21,30 +44,35 @@
 
 	function loadData() {
 
-		document.getElementById("info").innerHTML += "<br>Loading...";
+		document.getElementById("info").innerHTML += "<br>Accessing url...";
 
-		var url="https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
-		xmlhttp=new XMLHttpRequest();
+		var url = "https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
+		xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
+
+			console.log(xmlhttp);
+
 			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
 
-				document.getElementById("display").innerHTML += "<br>" + xmlhttp.responseText;
-				document.getElementById("info").innerHTML += "<br>Data read";
+				document.getElementById("info").innerHTML += "<br>Data pulled";
+				var table_str = xmlhttp.responseText;
+				console.log(table_str)
 
 				document.getElementById("info").innerHTML += "<br>Parsing...";
+				var table_arr = csvToArray(table_str)
+				console.log(table_arr)
 
-				var table = csvToArray(xmlhttp.responseText)
-				console.log(table)
+				document.getElementById("info").innerHTML += "<br>Creating HT table...";
+				table_HT = arrayToHTtable(table_arr)
+				console.log(table_HT)
 
 				document.getElementById("info").innerHTML += "<br>Displaying...";
-				document.getElementById("display").innerHTML += "<br>" + table;
-
-
-
+				document.getElementById("display").innerHTML = table_HT;
 			}
-			console.log(xmlhttp);
+			else {
+				document.getElementById("info").innerHTML += "<br>Something went wrong";
+			}
 		};
-		document.getElementById("info").innerHTML += "<br>Meh";
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
 	}
@@ -53,8 +81,11 @@
 
 <html>
   <body>
-	<button type="button" onclick="loadData()">Test 4</button>
+	<button type="button" onclick="loadData()">Test</button>
 	<div id="display"></div>
+	<hr>
 	<div id="info">Info</div>
+	<hr>
+	<div id="HTtable"></div>
   </body>
 </html>
