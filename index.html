@@ -1,5 +1,5 @@
 <!doctype html>
-<title>Google spreadsheet to HT-table 2</title>
+<title>Google spreadsheet to HT-table</title>
 
 <script type="text/javascript">
 
@@ -80,12 +80,28 @@
 </script>
 
 <html>
-  <body>
-	<button type="button" onclick="loadData()">Test</button>
-	<div id="display"></div>
-	<hr>
-	<div id="info">Info</div>
-	<hr>
-	<div id="HTtable"></div>
-  </body>
+	<link rel="stylesheet" type= "text/css" href="includes/style.css">
+	<body>
+		<div class="main_body">
+			<div align="center">
+				<font size="2">
+					Eina per convertir un google sheet en una taula de Hattrick
+				</font>
+			
+				<table align="center" border="0" width="60%">
+					<br>
+					<input id="input_text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+					<br>
+					<button type="button"  onclick="loadData()">Convertir</button>
+
+					<div id="display"></div>
+					<hr>
+					<div id="info">Info</div>
+					<hr>
+					<div id="HTtable"></div>
+
+				</table>
+			</div>
+		</div>
+	</body>
 </html>
