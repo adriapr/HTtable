@@ -1,21 +1,12 @@
 <!doctype html>
 <title>Google spreadsheet to HT-table</title>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 <script type="text/javascript">
-
-	function importCSVFromGoogleDrive() {
-
-		var file = DriveApp.getFilesByName("data.csv").next();
-		var csvData = Utilities.parseCsv(file.getBlob().getDataAsString());
-		var sheet = SpreadsheetApp.getActiveSheet();
-		sheet.getRange(1, 1, csvData.length, csvData[0].length).setValues(csvData);
-	}
-
 
 	function loadData() {
 
-	
+
+		document.getElementById("info").innerHTML = "Loading...";
 
 		// var url="https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/edit?usp=sharing";
 		// var url="https://docs.google.com/spreadsheet/pub?key=p_aHW5nOrj0VO2ZHTRRtqTQ&single=true&gid=0&range=A1&output=csv";
@@ -24,10 +15,14 @@
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
 				document.getElementById("display").innerHTML = xmlhttp.responseText;
+				document.getElementById("info").innerHTML = "Done";
 			}
 		};
+		document.getElementById("info").innerHTML = "Meh";
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
+
+
 	}
 
 </script>
@@ -39,8 +34,6 @@
   <body>
     <button type="button" onclick="loadData()">Load Spreadsheet Data</button>
     <div id="display"></div>
+    <div id="info"></div>
   </body>
 </html>
-
-
-
