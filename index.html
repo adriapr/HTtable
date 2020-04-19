@@ -42,11 +42,20 @@
 		return ret;
 	};
 
+	function parseURL() {
+		var
+	}
+
 	function loadData() {
 
 		document.getElementById("info").innerHTML += "<br>Accessing url...";
 
-		var url = "https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
+		var docID = document.getElementById("doc_id").value;
+
+		// var url = "https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
+		var url = "https://docs.google.com/spreadsheets/d/" + docID + "/export?format=csv"
+		document.getElementById("info").innerHTML += "<br>Pulling data from " + url;
+
 		xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 
@@ -86,14 +95,17 @@
 	<body>
 		<div class="main_body">
 			<div align="center">
-				<font size="2">
-					Eina per convertir un google sheet en una taula de Hattrick
-				</font>
+				Eina per convertir un google sheet en una taula de Hattrick
+				<br>
+
+				<img src="instructions.png" alt="Instruccions">
+				1. Assegurat que has compartit el document de forma publica.
+				2. Agafa el nom del document de la url (eg: 1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI) i posa'l aqui sota:
+				3. Prem convertir i aprecia la magia.
 			
 				<table align="center" border="0" width="60%">
 					<br>
-					<input id="input_text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-					<br>
+					<input id="doc_id" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 					<button type="button"  onclick="loadData()">Convertir</button>
 
 					<div id="display"></div>
