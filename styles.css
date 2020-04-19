@@ -3,13 +3,12 @@
 body            { font-family: 'Open Sans', serif; background: #eeeeee; margin:0; }
 a, h1, h2       { font-family: 'Raleway'; color: #377ba8; }
 
-
 .main_body {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
-  font-size: 8px;
+  font-size: 16px;
   /*line-height: 50%;*/
   /*background: #faa;*/
   text-size-adjust: none /* This prevents chrome readjusting fonts on mobile */
