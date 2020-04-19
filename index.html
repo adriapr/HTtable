@@ -15,8 +15,10 @@
 				document.getElementById("display").innerHTML = xmlhttp.responseText;
 				document.getElementById("info").innerHTML = "Done";
 			}
+			document.getElementById("info").innerHTML = xmlhttp;
+			console.log(xmlhttp);
 		};
-		document.getElementById("info").innerHTML = "Meh";
+		document.getElementById("info").innerHTML += "<br>Meh";
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
 	}
