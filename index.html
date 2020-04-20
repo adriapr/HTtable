@@ -44,6 +44,7 @@
 
 	function loadData() {
 
+		document.getElementById("info").innerHTML += "<hr><br><b>Debug output:</b>";
 		document.getElementById("info").innerHTML += "<br>Accessing url...";
 
 		var docID = document.getElementById("doc_id").value;
@@ -72,7 +73,8 @@
 				console.log(table_HT)
 
 				document.getElementById("info").innerHTML += "<br>Displaying...";
-				document.getElementById("display").innerHTML = table_HT;
+				document.getElementById("display").innerHTML = "<b>Resultat:</b><br><br>";
+				document.getElementById("display").innerHTML += table_HT;
 			}
 		};
 		xmlhttp.open("GET",url,true);
@@ -83,35 +85,39 @@
 
 <html>
 	<head>
-		<link rel="stylesheet" type= "text/css" href="styles.css">
+		<link rel="stylesheet" type="text/css" href="styles.css">
 	</head>
 	<body>
 		<div class="main_body">
-			<div align="center">
-				Eina per convertir un google sheet en una taula de Hattrick (by fuyas)
-				<br>
-				<br>
 
-				<img src="instructions.png" alt="Instruccions" width="1200"><br>
-				1. Assegurat que has compartit el document de forma publica.<br>
-				2. Agafa el nom del document de la url (eg: 1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI) i posa'l aqui sota:<br>
-				3. Prem convertir i aprecia la magia.<br><br>
-			
-				<table align="center" border="0" width="800">
-					<br>
-					<input id="doc_id" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" size="60" placeholder="1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI">
-					<br>
-					<button type="button"  onclick="loadData()">Convertir</button>
-				</table>
-			</div>
-			<div align="left">
-				<br><br><br>
-				<div id="display"></div>
-				<br><hr>
-				<div id="info"></div>
-				<br><hr>
-				<div id="HTtable"></div>
-			</div>
+			<table align="center" border="0">
+				<tr>
+					<td>
+						<br><br>
+						<b>Instruccions:</b><br>
+						<ol>
+							<li>Assegurat que has compartit el google sheet de forma publica.<br><br></li>
+							<li>Agafa el nom del document de la url (eg: 1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI) i copia'l aqui baix:<br>
+								<img src="url.png" alt="Instruccions"><br><br>
+							</li>
+							<li> Prem convertir i aprecia la magia.</li>
+						</ol> 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input id="doc_id" autocomplete="off" autocorrect="off" size=100 autocapitalize="off" spellcheck="false" placeholder="1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI">
+						<button type="button" onclick="loadData()">Convertir</button>
+						<br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="display"></div>
+						<div id="info" style="font-size:12px"></div>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>

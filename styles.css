@@ -12,22 +12,22 @@ a, h1, h2       { font-family: 'Raleway'; color: #377ba8; }
   /*line-height: 50%;*/
   /*background: #faa;*/
   text-size-adjust: none /* This prevents chrome readjusting fonts on mobile */
+  width: 800px;
 }
 
 input {
-    font-size: 24px;
-    width: 100%;
+    font-size: 18px;
     height: 40px;
-    padding: 10px 24px;
+    padding: 10px 16px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 8px;
     background-color: #ffffff;
-    resize: none;
+    /*resize: none;*/
 }
 
 button {
-    background-color: #008CBA;
+    background-color: #008C11;
     border-radius: 8px;
     border: none;
     padding: 4px 8px;
@@ -37,6 +37,6 @@ button {
     color: white;
     font-family: 'Raleway';
     /*font-weight: bold;*/
-    font-size: 16px;
+    font-size: 24px;
     cursor:pointer
 }
