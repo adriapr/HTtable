@@ -38,5 +38,11 @@ button {
     font-family: 'Raleway';
     /*font-weight: bold;*/
     font-size: 24px;
-    cursor:pointer
+    cursor:pointer;
+}
+
+input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
 }

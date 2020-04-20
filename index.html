@@ -1,91 +1,113 @@
 <!doctype html>
-<title>Google spreadsheet to HT-table</title>
-
-<script type="text/javascript">
-
-	function arrayToHTtable(table) {
-		var str_output = "[table]<br>";
-
-		for (row of table) {
-			str_output += "[tr]";
-			for (col of row) {
-				str_output += "[td]" + col + "[/td]";
-			}
-			str_output += "[/tr]<br>";
-		}
-
-		str_output += "[/table]";
-
-		return str_output;
-
-		// [table]
-		// [tr][td]UE Països Catalans[/td][td]Maurya Pal i Gol[/td][td]0-7[/td][/tr]
-		// [tr][td]Palomera Blanes[/td][td]C.F. Hippycat[/td][td]2-0[/td][/tr]
-		// [tr][td]Birrero Sabadell[/td][td]Angelets de la Terra[/td][td]0-6[/td][/tr]
-		// [/table]
-
-	}
-
-	function csvToArray(text) {
-		let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
-		for (l of text) {
-			if ('"' === l) {
-				if (s && l === p) row[i] += l;
-				s = !s;
-			} else if (',' === l && s) l = row[++i] = '';
-			else if ('\n' === l && s) {
-				if ('\r' === p) row[i] = row[i].slice(0, -1);
-				row = ret[++r] = [l = '']; i = 0;
-			} else row[i] += l;
-			p = l;
-		}
-		return ret;
-	};
-
-	function loadData() {
-
-		document.getElementById("info").innerHTML += "<hr><br><b>Debug output:</b>";
-		document.getElementById("info").innerHTML += "<br>Accessing url...";
-
-		var docID = document.getElementById("doc_id").value;
-
-		// var url = "https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
-		var url = "https://docs.google.com/spreadsheets/d/" + docID + "/export?format=csv"
-		document.getElementById("info").innerHTML += "<br>Pulling data from " + url;
-
-		xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-
-			console.log(xmlhttp);
-
-			if(xmlhttp.readyState == 4 && xmlhttp.status==200){
-
-				document.getElementById("info").innerHTML += "<br>Data pulled";
-				var table_str = xmlhttp.responseText;
-				console.log(table_str)
-
-				document.getElementById("info").innerHTML += "<br>Parsing...";
-				var table_arr = csvToArray(table_str)
-				console.log(table_arr)
-
-				document.getElementById("info").innerHTML += "<br>Creating HT table...";
-				table_HT = arrayToHTtable(table_arr)
-				console.log(table_HT)
-
-				document.getElementById("info").innerHTML += "<br>Displaying...";
-				document.getElementById("display").innerHTML = "<b>Resultat:</b><br><br>";
-				document.getElementById("display").innerHTML += table_HT;
-			}
-		};
-		xmlhttp.open("GET",url,true);
-		xmlhttp.send(null);
-	}
-
-</script>
 
 <html>
 	<head>
+		<title>Google spreadsheet to HT-table</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<script type="text/javascript">
+
+			function arrayToHTtable(table) {
+
+				var use_header = false;
+				if (document.getElementById("use_header").checked == true){
+					document.getElementById("info").innerHTML += "<br>First row is header...";
+					use_header = true;
+				}
+
+				var str_output = "[table]<br>";
+
+				for (row of table) {
+					if (use_header) {
+						str_output += "[th]";
+					}
+					else {
+						str_output += "[tr]";
+					}
+
+					for (col of row) {
+						str_output += "[td]" + col + "[/td]";
+					}
+
+					if (use_header) {
+						str_output += "[/th]<br>";
+						use_header = false;
+					}
+					else {
+						str_output += "[/tr]<br>";
+					}
+				}
+
+				str_output += "[/table]";
+
+				return str_output;
+
+				// [table]
+				// [tr][td]UE Països Catalans[/td][td]Maurya Pal i Gol[/td][td]0-7[/td][/tr]
+				// [tr][td]Palomera Blanes[/td][td]C.F. Hippycat[/td][td]2-0[/td][/tr]
+				// [tr][td]Birrero Sabadell[/td][td]Angelets de la Terra[/td][td]0-6[/td][/tr]
+				// [/table]
+			}
+
+			function csvToArray(text) {
+				let p = '', row = [''], ret = [row], i = 0, r = 0, s = !0, l;
+				for (l of text) {
+					if ('"' === l) {
+						if (s && l === p) row[i] += l;
+						s = !s;
+					} else if (',' === l && s) l = row[++i] = '';
+					else if ('\n' === l && s) {
+						if ('\r' === p) row[i] = row[i].slice(0, -1);
+						row = ret[++r] = [l = '']; i = 0;
+					} else row[i] += l;
+					p = l;
+				}
+				return ret;
+			};
+
+			function loadData() {
+
+				document.getElementById("info").innerHTML += "<hr><br><b>Debug output:</b>";
+				document.getElementById("info").innerHTML += "<br>Accessing url...";
+
+				var docID = document.getElementById("doc_id").value;
+
+				// var url = "https://docs.google.com/spreadsheets/d/1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI/export?format=csv";
+				var url = "https://docs.google.com/spreadsheets/d/" + docID + "/export?format=csv"
+				document.getElementById("info").innerHTML += "<br>Pulling data from " + url;
+
+				xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+
+					console.log(xmlhttp);
+
+					if(xmlhttp.readyState == 4 && xmlhttp.status==200){
+
+						document.getElementById("info").innerHTML += "<br>Data pulled";
+						var table_str = xmlhttp.responseText;
+						console.log(table_str)
+
+						document.getElementById("info").innerHTML += "<br>Parsing...";
+						var table_arr = csvToArray(table_str)
+						console.log(table_arr)
+
+						document.getElementById("info").innerHTML += "<br>Creating HT table...";
+						table_HT = arrayToHTtable(table_arr)
+						console.log(table_HT)
+
+						document.getElementById("info").innerHTML += "<br>Displaying...";
+						document.getElementById("display").innerHTML = "<b>Resultat:</b><br><br>";
+						document.getElementById("display").innerHTML += table_HT;
+					}
+				};
+				xmlhttp.open("GET",url,true);
+				xmlhttp.send(null);
+			}
+
+		</script>
+
 		<link rel="stylesheet" type="text/css" href="styles.css">
+
 	</head>
 	<body>
 		<div class="main_body">
@@ -107,8 +129,12 @@
 				<tr>
 					<td>
 						<input id="doc_id" autocomplete="off" autocorrect="off" size=100 autocapitalize="off" spellcheck="false" placeholder="1auP1O8DEJkCFXDN_-r13ieLFOLAmVbbWa8RSOpbPGrI">
-						<button type="button" onclick="loadData()">Convertir</button>
-						<br>
+						<button type="button" onclick="loadData()">Convertir</button><br>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						<input type="checkbox" id="use_header"> Primera CC fila es capcelera: <br>
 					</td>
 				</tr>
 				<tr>
