@@ -18,35 +18,23 @@
 				var str_output = "[table]<br>";
 
 				for (row of table) {
-					if (use_header) {
-						str_output += "[th]";
-					}
-					else {
-						str_output += "[tr]";
-					}
+					str_output += "[tr] ";
 
 					for (col of row) {
-						str_output += "[td]" + col + "[/td]";
+						if (use_header) {
+							str_output += " [th]" + col + "[/th] ";
+						} else {
+							str_output += " [td]" + col + "[/td] ";
+						}
 					}
 
-					if (use_header) {
-						str_output += "[/th]<br>";
-						use_header = false;
-					}
-					else {
-						str_output += "[/tr]<br>";
-					}
+					str_output += "[/tr]<br>";
+					use_header = false; // header can only be the first row
 				}
 
 				str_output += "[/table]";
 
 				return str_output;
-
-				// [table]
-				// [tr][td]UE Països Catalans[/td][td]Maurya Pal i Gol[/td][td]0-7[/td][/tr]
-				// [tr][td]Palomera Blanes[/td][td]C.F. Hippycat[/td][td]2-0[/td][/tr]
-				// [tr][td]Birrero Sabadell[/td][td]Angelets de la Terra[/td][td]0-6[/td][/tr]
-				// [/table]
 			}
 
 			function csvToArray(text) {
